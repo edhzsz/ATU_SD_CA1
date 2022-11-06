@@ -1,5 +1,7 @@
 package edgs_atu.display;
 
+import edgs_atu.shapes.ShapesManager;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,35 +15,35 @@ import java.awt.*;
  * to draw shapes.
  */
 public class CustomPanel extends JPanel {
+    /**
+     * Shapes manager that contains the shapes that will be rendered into the screen.
+     */
+    private ShapesManager manager;
+
+    /**
+     * Creates a new instance of this class with a provided shape manager.
+     *
+     * @param manager Shapes manager that contains the <code>Shape</code>s
+     *               that will be rendered into the screen
+     */
+    public CustomPanel(ShapesManager manager) {
+        this.manager = manager;
+    }
 
 
+    /**
+     * Renders the shapes to the screen.
+     *
+     * @param g the <code>Graphics</code> object to protect
+     */
     @Override
     protected void paintComponent(Graphics g) {
-        //The superclass does some important work in the method we've overridden, so we
-        //should invoke it.
+        // The superclass does some important work in the method we've overridden, so we
+        // should invoke it.
         super.paintComponent(g);
 
-        g.setColor(Color.blue);
-        //Here's an example of a shape.
-        //For our panels, the origin (0,0) is the top left corner
-        //This means that the +ve Y axis is "down", i.e. it's the opposite
-        //of the familiar cartesian coordinate system.
-        g.drawRect(5,20, 40,60);
-
-        //Exercises:
-        //1: Draw an oval that fits exactly within the rectangle above
-        //2: Draw an oval that fills the entire panel. NOTE: the panel class has getters for its width and height.
-        //3: Draw a circle of radius 25 that is centered in the center of the panel. Make the window bigger/smaller and
-        //      verify that it remains centered.
-        //4: See if you can find (using intellisense) the method required to draw a filled version of the circle from
-        //      exercise 3.
-        g.setColor(Color.red);
-
-        int circleRadius = 25;
-        g.drawOval(this.getWidth()/2 - circleRadius,
-                this.getHeight()/2 - circleRadius,
-                circleRadius * 2,
-                circleRadius*2);
+        // ask the shapes manager to draw all shapes
+        manager.drawShapes(g);
     }
 
 }
