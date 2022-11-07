@@ -27,10 +27,7 @@ public class Rectangle extends Shape implements Moveable {
      * @param height the height of this rectangle.
      */
     public Rectangle(Color color, int xCenter, int yCenter, int width, int height) {
-        super(color, xCenter, yCenter);
-
-        this.height = height;
-        this.width = width;
+        this(color, xCenter, yCenter, height, width, false);
     }
 
     /**
@@ -58,14 +55,16 @@ public class Rectangle extends Shape implements Moveable {
     }
 
     /**
-     * Draws a rectangle to console
-     *
-     * @param displayName        whether the name of the shapes should be displayed.
-     * @param displayBoundingBox whether the bounding box of the shapes should be displayed.
+     * Writes the extra properties particular for each shape to a String buffer
+     * to write to the console as part of the method drawShapeConsole.
+     * @param sb StringBuffer to write to.
      */
     @Override
-    public void drawShapeConsole(boolean displayName, boolean displayBoundingBox) {
-
+    protected void drawExtraPropertiesToConsole(StringBuffer sb) {
+        sb.append("; width: ");
+        sb.append(width);
+        sb.append("; height: ");
+        sb.append(height);
     }
 
     /**

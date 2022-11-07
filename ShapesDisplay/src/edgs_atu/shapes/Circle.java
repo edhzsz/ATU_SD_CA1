@@ -40,15 +40,16 @@ public class Circle extends Shape {
         this.radius = radius;
     }
 
+
     /**
-     * Draws a shape to console
-     *
-     * @param displayName        whether the name of the shapes should be displayed.
-     * @param displayBoundingBox whether the bounding box of the shapes should be displayed.
+     * Writes the extra properties particular for each shape to a String buffer
+     * to write to the console as part of the method drawShapeConsole.
+     * @param sb StringBuffer to write to.
      */
     @Override
-    public void drawShapeConsole(boolean displayName, boolean displayBoundingBox) {
-
+    protected void drawExtraPropertiesToConsole(StringBuffer sb) {
+        sb.append("; radius: ");
+        sb.append(radius);
     }
 
     /**

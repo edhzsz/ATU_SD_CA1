@@ -91,7 +91,30 @@ public abstract class Shape {
      * @param displayName whether the name of the shapes should be displayed.
      * @param displayBoundingBox whether the bounding box of the shapes should be displayed.
      */
-    public abstract void drawShapeConsole(boolean displayName, boolean displayBoundingBox);
+    public void drawShapeConsole(boolean displayName, boolean displayBoundingBox) {
+        StringBuffer sb = new StringBuffer();
+        sb.append("{ ");
+        sb.append("name: ");
+        sb.append(getShapeName());
+        sb.append("; color: ");
+        sb.append(color);
+        sb.append("; xCenter: ");
+        sb.append(xCenter);
+        sb.append("; yCenter: ");
+        sb.append(yCenter);
+        sb.append("; filled: ");
+        sb.append(filled);
+        drawExtraPropertiesToConsole(sb);
+        sb.append("; }");
+        System.out.println(sb);
+    }
+
+    /**
+     * Writes the extra properties particular for each shape to a String buffer
+     * to write to the console as part of the method drawShapeConsole.
+     * @param sb StringBuffer to write to.
+     */
+    protected abstract void drawExtraPropertiesToConsole(StringBuffer sb);
 
     /**
      * Draws a filled shape on the provided <code>Graphics</code> object.
