@@ -28,12 +28,12 @@ public class WindowCreator {
         shapesManager.addShape(quad);
 
         Quadrilateral quad2 = new Quadrilateral(Color.CYAN,
-                new Point(370, 160),
+                new Point(80, 80),
                 new Point[] {
-                        new Point(350, 150),
-                        new Point(385, 178),
-                        new Point(370, 185),
-                        new Point(334, 180)
+                        new Point(50, 50),
+                        new Point(120, 70),
+                        new Point(100, 120),
+                        new Point(40, 90)
                     },
                 true);
         shapesManager.addShape(quad2);

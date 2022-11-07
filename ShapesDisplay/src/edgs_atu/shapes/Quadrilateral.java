@@ -73,13 +73,36 @@ public class Quadrilateral extends Shape implements Rotatable {
         points = new Point[]{ topRight, topLeft, bottomLeft, bottomRight };
     }
 
-
     /**
      * Rotates the quadrilateral by 90 degrees around the center point.
      */
     @Override
     public void rotateNinetyDegrees() {
+        double angleInRadians = Math.toRadians(90);
+        Point ctr = new Point(xCenter, yCenter);
 
+        for(int i=0; i<4; i++) {
+            points[i] = rotateAround(ctr, points[i], angleInRadians);
+        }
+    }
+
+    private Point rotateAround(Point ctr, Point p, double rads) {
+        Point translated = new Point(p.getX() - ctr.getX(), p.getY() - ctr.getY());
+        Point rot = rotate(translated, rads);
+
+        return new Point(rot.getX() + ctr.getX(), rot.getY() + ctr.getY());
+    }
+
+    private Point rotate(Point p, double rads) {
+        int x = p.getX();
+        int y = p.getY();
+        double sinTheta = Math.sin(rads);
+        double cosTheta = Math.cos(rads);
+
+        double xp = x * cosTheta - y * sinTheta;
+        double yp = x * sinTheta + y * cosTheta;
+
+        return new Point((int)xp, (int)yp);
     }
 
     /**
