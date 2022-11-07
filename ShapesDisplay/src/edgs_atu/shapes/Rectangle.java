@@ -58,18 +58,6 @@ public class Rectangle extends Shape implements Moveable {
     }
 
     /**
-     * Draws a rectangle on the provided <code>Graphics</code> object.
-     *
-     * @param g                  The <code>Graphics</code> object to draw to.
-     * @param displayName        whether the name of the shapes should be displayed.
-     * @param displayBoundingBox whether the bounding box of the shapes should be displayed.
-     */
-    @Override
-    public void drawShape(Graphics g, boolean displayName, boolean displayBoundingBox) {
-
-    }
-
-    /**
      * Draws a rectangle to console
      *
      * @param displayName        whether the name of the shapes should be displayed.
@@ -78,6 +66,46 @@ public class Rectangle extends Shape implements Moveable {
     @Override
     public void drawShapeConsole(boolean displayName, boolean displayBoundingBox) {
 
+    }
+
+    /**
+     * Draws a filled shape on the provided <code>Graphics</code> object.
+     *
+     * @param g The <code>Graphics</code> object to draw to.
+     */
+    @Override
+    protected void drawFilledShape(Graphics g) {
+
+    }
+
+    /**
+     * Draws a non-filled shape on the provided <code>Graphics</code> object.
+     *
+     * @param g The <code>Graphics</code> object to draw to.
+     */
+    @Override
+    protected void drawShape(Graphics g) {
+
+    }
+
+    /**
+     * Returns the name of this shape.
+     *
+     * @return the name of the shape.
+     */
+    @Override
+    protected String getShapeName() {
+        return "Rectangle";
+    }
+
+    /**
+     * Creates the bounding box of the shape.
+     *
+     * @return the bounding box of the shape.
+     */
+    @Override
+    protected BoundingBox createBoundingBox() {
+        return null;
     }
 }
 

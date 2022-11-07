@@ -1,6 +1,5 @@
 package edgs_atu.shapes;
 
-
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +74,7 @@ public class ShapesManager {
     }
 
     /**
-     * Draws the shapes managed by this instace.
+     * Draws the shapes managed by this instance.
      * @param g The <code>Graphics</code> object to draw to.
      */
     public void drawShapes(Graphics g) {

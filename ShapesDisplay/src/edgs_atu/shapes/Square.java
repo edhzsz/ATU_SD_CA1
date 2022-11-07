@@ -33,4 +33,14 @@ public class Square extends Rectangle {
     public Square(Color color, int xCenter, int yCenter, int length, boolean filled) {
         super(color, xCenter, yCenter, length, length, filled);
     }
+
+    /**
+     * Returns the name of this shape.
+     *
+     * @return the name of the shape.
+     */
+    @Override
+    protected String getShapeName() {
+        return "Square";
+    }
 }

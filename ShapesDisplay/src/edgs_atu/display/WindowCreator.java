@@ -11,18 +11,20 @@ public class WindowCreator {
 
         ShapesManager shapesManager = new ShapesManager();
 
-
         shapesManager.setDisplayName(true);
         shapesManager.setDisplayBoundingBox(false);
 
         shapesManager.addShape(new Circle(Color.green, 300,80, 50));
         Rectangle rect = new Rectangle(Color.blue, 50,120,50, 80, true);
         shapesManager.addShape(rect);
+
+        Square sq = new Square(Color.orange, 250,320, 50, true);
+        shapesManager.addShape(sq);
+
         //Note: I don't display this rectangle - I merely use it to initialise a quadrilateral
         Rectangle rect2 = new Rectangle(Color.red, 140,180, 40, 30);
-        //Quadrilateral quad = new Quadrilateral(rect2);
-        //shapesManager.addShape(quad);
-
+        Quadrilateral quad = new Quadrilateral(rect2);
+        shapesManager.addShape(quad);
 
         //Create and configure our JFrame (window)
         CustomWindow customWindow = new CustomWindow(shapesManager);
