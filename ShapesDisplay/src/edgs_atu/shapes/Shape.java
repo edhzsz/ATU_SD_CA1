@@ -190,6 +190,7 @@ public abstract class Shape {
      */
     public void setXCenter(int xCenter) {
         this.xCenter = xCenter;
+        recreateBoundingBox();
     }
 
     /**
@@ -206,6 +207,7 @@ public abstract class Shape {
      */
     public void setYCenter(int yCenter) {
         this.yCenter = yCenter;
+        recreateBoundingBox();
     }
 
     protected BoundingBox getBoundingBox() {
@@ -216,6 +218,12 @@ public abstract class Shape {
         return boundingBox;
     }
 
+    /**
+     * Recreates the shape's bounding box.
+     * This needs to happen everytime the center is changed
+     * or the particular properties of the child properties
+     * is changed.
+     */
     protected void recreateBoundingBox() {
         this.boundingBox = createBoundingBox();
     }
