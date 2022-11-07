@@ -210,6 +210,10 @@ public abstract class Shape {
         recreateBoundingBox();
     }
 
+    /**
+     * Calculates and caches the bounding box of the shape
+     * @return the bounding box of the shape
+     */
     protected BoundingBox getBoundingBox() {
         if(boundingBox == null) {
             recreateBoundingBox();
@@ -226,5 +230,15 @@ public abstract class Shape {
      */
     protected void recreateBoundingBox() {
         this.boundingBox = createBoundingBox();
+    }
+
+    /**
+     * Indicates whether the point is in between the bounds of the shape.
+     * @param p point to validate if it is in bounds.
+     * @return whether the point is in between the bounds of the shape.
+     */
+    public boolean inBounds(Point p) {
+        BoundingBox bb = getBoundingBox();
+        return bb.inBounds(p);
     }
 }

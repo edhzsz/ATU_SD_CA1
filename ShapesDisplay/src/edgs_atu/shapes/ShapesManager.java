@@ -83,4 +83,36 @@ public class ShapesManager {
             shape.drawShapeConsole(displayBoundingBox);
         }
     }
+
+    /**
+     * Handles a click on a specific pixel represented by the Point p.
+     * If the point is in bounds of any shape the shape will be updated.
+     * If the button pressed is the left button, the filled property
+     * of the shape will be toggled.
+     * If the button pressed is the right button, and the shape is Moveable,
+     * the moveTenUnits method will be invoked.
+     * If the button pressed is the right button, and the shape is Rotatable,
+     *      * the rotateNinetyDegrees method will be invoked.
+     * @param p point in which the click occurred.
+     * @param button which button was pressed.
+     *               1 means left button
+     *               2 means center button
+     *               3 means right button
+     */
+    public void handleClick(Point p, int button) {
+        for(Shape s: shapes) {
+            if(s.inBounds(p)) {
+                if(button == 1) {
+                    s.setFilled(!s.isFilled());
+                } else if(button == 3) {
+                    if(s instanceof Moveable) {
+                        ((Moveable)s).moveTenUnits();
+                    }
+                    if(s instanceof Rotatable) {
+                        ((Rotatable)s).rotateNinetyDegrees();
+                    }
+                }
+            }
+        }
+    }
 }

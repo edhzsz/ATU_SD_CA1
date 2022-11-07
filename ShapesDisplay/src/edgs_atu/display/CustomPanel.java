@@ -1,9 +1,12 @@
 package edgs_atu.display;
 
+import edgs_atu.shapes.Point;
 import edgs_atu.shapes.ShapesManager;
 
 import javax.swing.*;
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * This allows us to create a panel which we can add to a frame/window
@@ -28,6 +31,26 @@ public class CustomPanel extends JPanel {
      */
     public CustomPanel(ShapesManager manager) {
         this.manager = manager;
+        // Make a closure over the current panel to be able to repaint on mouse clicks
+        JPanel panel = this;
+
+        addMouseListener(new MouseAdapter() {
+            /**
+             * {@inheritDoc}
+             *
+             * @param e
+             */
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+
+                Point click = new Point(e.getX(), e.getY());
+                int button = e.getButton();
+
+                manager.handleClick(click, button);
+                panel.repaint();
+            }
+        });
     }
 
 

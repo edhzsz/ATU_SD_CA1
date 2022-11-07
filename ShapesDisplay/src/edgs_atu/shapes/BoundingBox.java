@@ -100,4 +100,16 @@ public class BoundingBox {
         sb.append("; }");
         return sb.toString();
     }
+
+    /**
+     * Indicates whether the point is in between the bounds of this bounding box.
+     * @param p point to validate if it is in bounds.
+     * @return whether the point is in between the bounds of this bounding box.
+     */
+    public boolean inBounds(Point p) {
+        int x = p.getX();
+        int y = p.getY();
+
+        return x >= topRight.getX() && x <= bottomLeft.getX() && y >= topRight.getY() && y <= bottomLeft.getY();
+    }
 }
