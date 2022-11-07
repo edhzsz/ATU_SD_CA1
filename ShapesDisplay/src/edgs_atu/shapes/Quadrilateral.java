@@ -19,22 +19,58 @@ public class Quadrilateral extends Shape implements Rotatable {
     /**
      * Creates a new Quadrilateral with the provided arguments.
      * @param color Color of the quadrilateral.
-     * @param xCenter X coordinate, in pixels, of the center of the quadrilateral.
-     * @param yCenter Y coordinate, in pixels, of the center of the quadrilateral.
+     * @param center the center of the quadrilateral.
+     * @param p1 A point that defines the quadrilateral.
+     * @param p2 A point that defines the quadrilateral.
+     * @param p3 A point that defines the quadrilateral.
+     * @param p4 A point that defines the quadrilateral.
+     */
+    public Quadrilateral(Color color, Point center, Point p1, Point p2, Point p3, Point p4) {
+        this(color, center, new Point[]{p1, p2, p3, p4}, false);
+    }
+
+    /**
+     * Creates a new Quadrilateral with the provided arguments.
+     * @param color Color of the quadrilateral.
+     * @param center the center of the quadrilateral.
+     * @param p1 A point that defines the quadrilateral.
+     * @param p2 A point that defines the quadrilateral.
+     * @param p3 A point that defines the quadrilateral.
+     * @param p4 A point that defines the quadrilateral.
+     * @param filled whether the rectangle is filled.
+     */
+    public Quadrilateral(Color color, Point center, Point p1, Point p2, Point p3, Point p4, boolean filled) {
+        this(color, center, new Point[]{p1, p2, p3, p4}, filled);
+    }
+
+    /**
+     * Creates a new Quadrilateral with the provided arguments.
+     * @param color Color of the quadrilateral.
+     * @param center the center of the quadrilateral.
      * @param points The points that define the quadrilateral.
      * @param filled whether the rectangle is filled.
      */
-    public Quadrilateral(Color color, int xCenter, int yCenter, Point[] points, boolean filled) {
-        super(color, xCenter, yCenter, filled);
+    public Quadrilateral(Color color, Point center, Point[] points, boolean filled) {
+        super(color, center.getX(), center.getY(), filled);
 
         this.points = points;
     }
 
+    /**
+     * Creates a new quadrilateral that covers the provided <code>Rectangle</code>
+     * @param rect the rectangle that defines the quadrilateral.
+     */
     public Quadrilateral(Rectangle rect) {
         super(rect.getColor(), rect.getXCenter(), rect.getYCenter(), rect.isFilled());
 
-        // Calculate the points here
-        points = new Point[4];
+        // The rectangle bounding box points are the corners of the rectangle
+        BoundingBox bb = rect.getBoundingBox();
+        Point topRight = bb.getTopRight();
+        Point bottomLeft = bb.getBottomLeft();
+        Point topLeft = new Point(bottomLeft.getX(), topRight.getY());
+        Point bottomRight = new Point(topRight.getX(), bottomLeft.getY());
+
+        points = new Point[]{ topRight, topLeft, bottomLeft, bottomRight };
     }
 
 
@@ -53,10 +89,14 @@ public class Quadrilateral extends Shape implements Rotatable {
      */
     @Override
     protected void drawExtraPropertiesToConsole(StringBuffer sb) {
-        sb.append("; points [: ");
+        sb.append("; points: [");
         for(Point p:points) {
             sb.append(p);
+            sb.append(", ");
         }
+
+        sb.delete(sb.length() - 2, sb.length());
+        sb.append("]");
     }
 
     /**
@@ -66,7 +106,15 @@ public class Quadrilateral extends Shape implements Rotatable {
      */
     @Override
     protected void drawFilledShape(Graphics g) {
+        int[] xPoints = new int[4];
+        int[] yPoints = new int[4];
 
+        for(int i = 0; i<4; i++) {
+            xPoints[i] = points[i].getX();
+            yPoints[i] = points[i].getY();
+        }
+
+        g.fillPolygon(xPoints, yPoints, 4);
     }
 
     /**
@@ -76,7 +124,15 @@ public class Quadrilateral extends Shape implements Rotatable {
      */
     @Override
     protected void drawShape(Graphics g) {
+        int[] xPoints = new int[4];
+        int[] yPoints = new int[4];
 
+        for(int i = 0; i<4; i++) {
+            xPoints[i] = points[i].getX();
+            yPoints[i] = points[i].getY();
+        }
+
+        g.drawPolygon(xPoints, yPoints, 4);
     }
 
     /**
@@ -96,8 +152,20 @@ public class Quadrilateral extends Shape implements Rotatable {
      */
     @Override
     protected BoundingBox createBoundingBox() {
-        Point topRight = new Point(xCenter - 10, yCenter - 10);
-        Point bottomLeft = new Point(topRight.getX() + 10, topRight.getY() + 10);
+        int minX = Integer.MAX_VALUE;
+        int minY = Integer.MAX_VALUE;
+        int maxX = Integer.MIN_VALUE;
+        int maxY = Integer.MIN_VALUE;
+
+        for(Point p: points) {
+            minX = Math.min(minX, p.getX());
+            maxX = Math.max(maxX, p.getX());
+            minY = Math.min(minY, p.getY());
+            maxY = Math.max(maxY, p.getY());
+        }
+
+        Point topRight = new Point(minX, minY);
+        Point bottomLeft = new Point(maxX, maxY);
 
         return new BoundingBox(bottomLeft, topRight);
     }

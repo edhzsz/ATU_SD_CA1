@@ -1,6 +1,7 @@
 package edgs_atu.display;
 
 import edgs_atu.shapes.*;
+import edgs_atu.shapes.Point;
 import edgs_atu.shapes.Rectangle;
 
 import javax.swing.*;
@@ -15,16 +16,27 @@ public class WindowCreator {
         shapesManager.setDisplayBoundingBox(true);
 
         shapesManager.addShape(new Circle(Color.green, 300,80, 50));
-        Rectangle rect = new Rectangle(Color.blue, 50,120,50, 80, true);
+        Rectangle rect = new Rectangle(Color.blue, 50,120,50, 80);
         shapesManager.addShape(rect);
 
         Square sq = new Square(Color.orange, 250,320, 50, true);
         shapesManager.addShape(sq);
 
         //Note: I don't display this rectangle - I merely use it to initialise a quadrilateral
-        Rectangle rect2 = new Rectangle(Color.red, 140,180, 40, 30);
+        Rectangle rect2 = new Rectangle(Color.red, 140,180, 40, 30, true);
         Quadrilateral quad = new Quadrilateral(rect2);
         shapesManager.addShape(quad);
+
+        Quadrilateral quad2 = new Quadrilateral(Color.CYAN,
+                new Point(370, 160),
+                new Point[] {
+                        new Point(350, 150),
+                        new Point(385, 178),
+                        new Point(370, 185),
+                        new Point(334, 180)
+                    },
+                true);
+        shapesManager.addShape(quad2);
 
         //Create and configure our JFrame (window)
         CustomWindow customWindow = new CustomWindow(shapesManager);
