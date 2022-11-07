@@ -5,7 +5,7 @@ package edgs_atu.shapes;
  */
 public interface Moveable {
     /**
-     * Moves the shape by 10 pixels in the X axis.
+     * Moves the shape by 10 pixels on both axis.
      */
     void moveTenUnits();
 }

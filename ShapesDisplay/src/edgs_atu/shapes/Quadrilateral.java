@@ -96,6 +96,9 @@ public class Quadrilateral extends Shape implements Rotatable {
      */
     @Override
     protected BoundingBox createBoundingBox() {
-        return null;
+        Point topRight = new Point(xCenter - 10, yCenter - 10);
+        Point bottomLeft = new Point(topRight.getX() + 10, topRight.getY() + 10);
+
+        return new BoundingBox(bottomLeft, topRight);
     }
 }

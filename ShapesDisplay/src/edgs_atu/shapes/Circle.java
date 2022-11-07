@@ -89,6 +89,10 @@ public class Circle extends Shape {
      */
     @Override
     protected BoundingBox createBoundingBox() {
-        return null;
+        Point topRight = new Point(xCenter - radius, yCenter - radius);
+        Point bottomLeft = new Point(xCenter + radius, yCenter + radius);
+
+        return new BoundingBox(bottomLeft, topRight);
+
     }
 }

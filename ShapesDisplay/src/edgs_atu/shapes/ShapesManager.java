@@ -80,7 +80,7 @@ public class ShapesManager {
     public void drawShapes(Graphics g) {
         for(Shape shape:shapes) {
             shape.drawShape(g, displayName, displayBoundingBox);
-            shape.drawShapeConsole(displayName, displayBoundingBox);
+            shape.drawShapeConsole(displayBoundingBox);
         }
     }
 }

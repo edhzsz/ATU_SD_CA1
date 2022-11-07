@@ -36,7 +36,7 @@ public abstract class Shape {
     /**
      * The bounding box of the shape.
      */
-    protected BoundingBox boundingBox;
+    private BoundingBox boundingBox;
 
     /**
      * Creates a new shape with the provided arguments
@@ -60,7 +60,6 @@ public abstract class Shape {
         this.filled = filled;
         this.xCenter = xCenter;
         this.yCenter = yCenter;
-        this.boundingBox = createBoundingBox();
     }
 
     /**
@@ -70,6 +69,8 @@ public abstract class Shape {
      * @param displayBoundingBox whether the bounding box of the shapes should be displayed.
      */
     public void drawShape(Graphics g, boolean displayName, boolean displayBoundingBox) {
+        g.setColor(color);
+
         if(filled) {
             drawFilledShape(g);
         } else {
@@ -77,26 +78,25 @@ public abstract class Shape {
         }
 
         if(displayName) {
+            g.setColor(Color.BLACK);
             String name = getShapeName();
             g.drawString(name, xCenter, yCenter);
         }
 
         if(displayBoundingBox) {
-            boundingBox.draw(g);
+            getBoundingBox().draw(g);
         }
     }
 
     /**
      * Draws a shape to console
-     * @param displayName whether the name of the shapes should be displayed.
      * @param displayBoundingBox whether the bounding box of the shapes should be displayed.
      */
-    public void drawShapeConsole(boolean displayName, boolean displayBoundingBox) {
+    public void drawShapeConsole(boolean displayBoundingBox) {
         StringBuffer sb = new StringBuffer();
-        sb.append("{ ");
-        sb.append("name: ");
         sb.append(getShapeName());
-        sb.append("; color: ");
+        sb.append("{ ");
+        sb.append("color: ");
         sb.append(color);
         sb.append("; xCenter: ");
         sb.append(xCenter);
@@ -104,6 +104,10 @@ public abstract class Shape {
         sb.append(yCenter);
         sb.append("; filled: ");
         sb.append(filled);
+        if(displayBoundingBox) {
+            sb.append("; boundingBox: ");
+            sb.append(boundingBox);
+        }
         drawExtraPropertiesToConsole(sb);
         sb.append("; }");
         System.out.println(sb);
@@ -202,5 +206,17 @@ public abstract class Shape {
      */
     public void setYCenter(int yCenter) {
         this.yCenter = yCenter;
+    }
+
+    protected BoundingBox getBoundingBox() {
+        if(boundingBox == null) {
+            recreateBoundingBox();
+        }
+
+        return boundingBox;
+    }
+
+    protected void recreateBoundingBox() {
+        this.boundingBox = createBoundingBox();
     }
 }

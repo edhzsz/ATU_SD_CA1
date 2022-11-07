@@ -12,7 +12,7 @@ public class WindowCreator {
         ShapesManager shapesManager = new ShapesManager();
 
         shapesManager.setDisplayName(true);
-        shapesManager.setDisplayBoundingBox(false);
+        shapesManager.setDisplayBoundingBox(true);
 
         shapesManager.addShape(new Circle(Color.green, 300,80, 50));
         Rectangle rect = new Rectangle(Color.blue, 50,120,50, 80, true);

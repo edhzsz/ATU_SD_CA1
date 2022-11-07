@@ -47,11 +47,13 @@ public class Rectangle extends Shape implements Moveable {
     }
 
     /**
-     * Moves the rectangle by 10 pixels in the X axis.
+     * Moves the rectangle by 10 pixels on both axis.
      */
     @Override
     public void moveTenUnits() {
-
+        this.xCenter += 10;
+        this.yCenter += 10;
+        recreateBoundingBox();
     }
 
     /**
@@ -74,7 +76,8 @@ public class Rectangle extends Shape implements Moveable {
      */
     @Override
     protected void drawFilledShape(Graphics g) {
-
+        Point topRight = buildTopRightPoint();
+        g.fillRect(topRight.getX(), topRight.getY(), width, height);
     }
 
     /**
@@ -84,7 +87,15 @@ public class Rectangle extends Shape implements Moveable {
      */
     @Override
     protected void drawShape(Graphics g) {
+        Point topRight = buildTopRightPoint();
+        g.drawRect(topRight.getX(), topRight.getY(), width, height);
+    }
 
+    protected Point buildTopRightPoint() {
+        int halfWidth = width / 2;
+        int halfHeight = height / 2;
+
+        return new Point(xCenter - halfWidth, yCenter - halfHeight);
     }
 
     /**
@@ -104,7 +115,10 @@ public class Rectangle extends Shape implements Moveable {
      */
     @Override
     protected BoundingBox createBoundingBox() {
-        return null;
+        Point topRight =  buildTopRightPoint();
+        Point bottomLeft = new Point(topRight.getX() + width, topRight.getY() + height);
+
+        return new BoundingBox(bottomLeft, topRight);
     }
 }
 
