@@ -40,7 +40,6 @@ public class Circle extends Shape {
         this.radius = radius;
     }
 
-
     /**
      * Writes the extra properties particular for each shape to a String buffer
      * to write to the console as part of the method drawShapeConsole.
@@ -59,7 +58,8 @@ public class Circle extends Shape {
      */
     @Override
     protected void drawFilledShape(Graphics g) {
-
+        int diameter = 2 * radius;
+        g.fillOval(xCenter - radius, yCenter - radius,  diameter, diameter);
     }
 
     /**
@@ -69,7 +69,8 @@ public class Circle extends Shape {
      */
     @Override
     protected void drawShape(Graphics g) {
-
+        int diameter = 2 * radius;
+        g.drawOval(xCenter - radius, yCenter - radius, diameter, diameter);
     }
 
     /**
@@ -93,6 +94,5 @@ public class Circle extends Shape {
         Point bottomLeft = new Point(xCenter + radius, yCenter + radius);
 
         return new BoundingBox(bottomLeft, topRight);
-
     }
 }
